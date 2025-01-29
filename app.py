@@ -73,7 +73,8 @@ def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     try:
         # Enable safe FAISS deserialization
-        new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
+        new_db = FAISS.load_local("faiss_index", embeddings)
+
         docs = new_db.similarity_search(user_question)
     except Exception as e:
         st.error(f"⚠️ Error loading FAISS index: {str(e)}")
