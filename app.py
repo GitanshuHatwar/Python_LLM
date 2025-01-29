@@ -2,23 +2,26 @@ import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
-import shutil
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import google.generativeai as genai
+from langchain.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
-from langchain.vectorstores import FAISS  # This ensures compatibility
+import shutil
+
+# ✅ This should be the first Streamlit command in your script
+st.set_page_config(page_title="Chat with PDF", layout="wide")
 
 # Load environment variables
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 if not api_key:
-    st.error("❌ GOOGLE_API_KEY is missing. Please check your .env file or Streamlit secrets.")
-    st.stop()
-
+    raise ValueError("GOOGLE_API_KEY is not set. Please check your .env file.")
 genai.configure(api_key=api_key)
+
+# (Rest of your code follows...)
 
 # Ensure FAISS works correctly
 try:
