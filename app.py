@@ -107,7 +107,7 @@ def list_uploaded_files():
 
 # Main function for Streamlit UI
 def main():
-    st.header("💬 Chat with PDF using Gemini AI")
+    st.header("💬 Chat with PDF using GeekVelocity's personlaize chatbot")
 
     # Sidebar for file upload and processing
     with st.sidebar:
